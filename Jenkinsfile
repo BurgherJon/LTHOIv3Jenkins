@@ -23,13 +23,10 @@ pipeline {
 			try {
     				timeout(time: 10, unit: 'SECONDS') 
 				{ 
-        				userInput = input
-					(
-        					id: 'versionCheck', message: 'What is the new version number?', parameters: 
-						[
+        				userInput = input(
+        					id: 'versionCheck', message: 'What is the new version number?', parameters: [
         						[$class: 'TextParameterDefinition', defaultValue: '2017-08-28r0', description: 'Version', name: 'vers']
-        					]
-					)
+        					])
     				}
 			} catch(err) { // timeout reached or input false
     				def user = err.getCauses()[0].getUser()
