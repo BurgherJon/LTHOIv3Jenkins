@@ -17,8 +17,11 @@ pipeline {
 	   {
             steps 
             {
-                echo 'Define Jonathan as the user.'
-			sh 'gcloud config set account JonathanCavell@gmail.com'
+                echo 'Login the test service account.'
+			sh 'gcloud auth activate-service-account jenkins@lthoi-test.iam.gserviceaccount.com --key-file=/home/bitnami/downloads/lthoi-test-80a0c5a916f6.json'
+
+			echo 'Login the prod service account.'
+			sh 'gcloud auth activate-service-account jenkins@leavethehouseoutofit.iam.gserviceaccount.com --key-file=/home/bitnami/downloads/LeaveTheHouseOutOfIt-fac0b08781ca.json'
 
 			echo 'Switch to the prod project.'
 			sh 'gcloud config set project leavethehouseoutofit'
