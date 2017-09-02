@@ -17,7 +17,10 @@ pipeline {
 	   {
             steps 
             {
-                echo 'Switch to the prod project.'
+                echo 'Define Jonathan as the user.'
+			sh 'gcloud config set account JonathanCavell@gmail.com'
+
+			echo 'Switch to the prod project.'
 			sh 'gcloud config set project leavethehouseoutofit'
 
 			echo 'Copy SQLDump to test storage bucket.'
