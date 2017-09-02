@@ -18,9 +18,9 @@ pipeline {
             steps 
 	      {
                 echo 'Check if we need one.'
-			def userInput = true
-			def didTimeout = false
-			try {
+		  def userInput = true
+		  def didTimeout = false
+		  try {
     				timeout(time: 10, unit: 'SECONDS') 
 				{ 
         				userInput = input(
@@ -45,8 +45,8 @@ pipeline {
         			echo "this is where we'd do the steps."
     			} 
 
-            }
-        }
+               }
+           }
 
 
 
