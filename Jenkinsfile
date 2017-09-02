@@ -25,7 +25,7 @@ pipeline {
 				{ 
         				userInput = input
 					(
-        					id: 'versionCheck', message: 'What is the new version number (let timeout if there is not one)?', parameters: 
+        					id: 'versionCheck', message: 'What is the new version number?', parameters: 
 						[
         						[$class: 'TextParameterDefinition', defaultValue: '2017-08-28r0', description: 'Version', name: 'vers']
         					]
