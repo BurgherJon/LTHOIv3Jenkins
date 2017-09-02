@@ -27,7 +27,7 @@ pipeline {
 			sh 'gcloud sql instances export lthoidb gs://lthoi-test.appspot.com/sqldumpfile.gz --database lthoidb'
 
 			echo 'Login the test service account.'
-			sh 'gcloud auth activate-service-account jenkins@lthoi-test.iam.gserviceaccount.com --key-file=/home/bitnami/downloads/lthoi-test-89f6c4654dd1.json'
+			sh 'gcloud auth activate-service-account jenkins2@lthoi-test.iam.gserviceaccount.com --key-file=/home/bitnami/downloads/lthoi-test-89d068b955b7.json'
 
 			echo 'Switch to the test project.'
 			sh 'gcloud config set project lthoi-test'
