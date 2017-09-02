@@ -32,9 +32,6 @@ pipeline {
 			echo 'Switch to the test project.'
 			sh 'gcloud config set project lthoi-test'
 
-			echo 'Update access to the export.'
-			sh 'gsutil acl ch -u ig32efblkvghtodpsxwhd4m5pi@speckle-umbrella-13.iam.gserviceaccount.com:O gs://lthoi-test.appspot.com/sqldumpfile.gz'			
-
 			echo 'Import the database.'
 			sh 'gcloud sql instances import lthoidb gs://lthoi-test.appspot.com/sqldumpfile.gz --quiet'
             }
