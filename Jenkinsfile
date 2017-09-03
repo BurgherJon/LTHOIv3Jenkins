@@ -15,18 +15,10 @@ pipeline {
         }
 	   stage('Reconfigure') 
 	   {
-            	def userInput = input(
-		  id: 'userInput', message: 'Let\'s promote?', parameters: [
-		   [$class: 'TextParameterDefinition', defaultValue: 'uat', description: 'Environment', name: 'env'],
-		   [$class: 'TextParameterDefinition', defaultValue: 'uat1', description: 'Target', name: 'target']
-		])
-
-		echo ("Env: "+userInput['env'])
-		echo ("Target: "+userInput['target'])
-
-	     steps 
+            steps 
 	      {
        	 echo 'check if we need one'
+		 input id: 'Version', message: 'New Version Dialouge', ok: 'Go', parameters: [booleanParam(defaultValue: false, description: 'Do we need to create a new version?', name: 'needs'), string(defaultValue: '2016-08-08r0', description: 'What is the new version?', name: 'vers')]
              }
           }
 
