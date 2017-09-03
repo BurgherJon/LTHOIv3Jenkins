@@ -18,7 +18,6 @@ pipeline {
             steps 
 	      {
        echo 'Check if we need one.'
-	def userInput = true
 	def didTimeout = false
 	try {
     		timeout(time: 10, unit: 'SECONDS') 
