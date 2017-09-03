@@ -13,7 +13,7 @@ pipeline {
 			sh './gradlew build'
             }
         }
-	   stage('Reconfigure with new value for version.') 
+	   stage('Reconfigure') 
 	   {
             	def userInput = input(
 		  id: 'userInput', message: 'Let\'s promote?', parameters: [
