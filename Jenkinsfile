@@ -20,6 +20,14 @@ pipeline {
             steps 
 	      {
        	 echo 'check if we need one.'
+		 def userInput = input(
+ 		   id: 'userInput', message: 'Let\'s promote?', parameters: [
+ 			[$class: 'BooleanParameterDefinition', defaultValue: true, description: 'Do you require an update to the version?', name: 'needs'],
+ 			[$class: 'TextParameterDefinition', defaultValue: 'uat1', description: 'Version', name: 'version']
+		 ])
+
+		echo ("Env: "+userInput['needs'])
+		echo ("Target: "+userInput['version'])	
 
              }
           }
