@@ -19,31 +19,7 @@ pipeline {
 	   {
             steps 
 	      {
-       echo 'Check if we need one.'
-	try {
-    		timeout(time: 10, unit: 'SECONDS') 
-		{ 
-        		userInput = input(
-        		id: 'versionCheck', message: 'What is the new version number?', parameters: [
-        			[$class: 'TextParameterDefinition', defaultValue: '2017-08-28r0', description: 'Version', name: 'vers']
-        		])
-    		}
-	     } catch(err) { // timeout reached or input false
-    			def user = err.getCauses()[0].getUser()
-    			if('SYSTEM' == user.toString()) { // SYSTEM means timeout.
-        			didTimeout = true
-    			} 
-		}
-
-	     	if (didTimeout) 
-		{
-                	echo "no input, proceeding."
-    		} 
-		else 
-		{
-        		// do something else
-        		echo "this is where we'd do the steps."
-    		} 
+       	 echo 'check if we need one.'
 
              }
           }
