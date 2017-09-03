@@ -1,4 +1,6 @@
 pipeline {
+    environment { didTimeout = false }
+
     agent any
 
     stages {
@@ -18,7 +20,6 @@ pipeline {
             steps 
 	      {
        echo 'Check if we need one.'
-	def didTimeout = false
 	try {
     		timeout(time: 10, unit: 'SECONDS') 
 		{ 
