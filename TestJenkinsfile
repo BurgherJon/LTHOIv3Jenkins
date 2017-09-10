@@ -5,11 +5,18 @@ def processConfigs()
 	configs = readYaml file: "./jenkinsconfig.yaml"
 	if (configs.CreateNewApi == true)
 	{
-		echo 'Do it.'
+		echo 'Login the test service account.'
+		sh 'gcloud auth activate-service-account jenkins2@lthoi-test.iam.gserviceaccount.com --key-file=/home/bitnami/downloads/lthoi-test-89d068b955b7.json'
+
+		echo 'Switch to the test project.'
+		sh 'gcloud config set project lthoi-test'
+
+		echo 'Deploy the new API.'
+		sh 'gcloud service-management deploy openapi.json'
 	}
 	else
 	{
-		echo 'Dont.'
+		echo 'Not creating a new API'
 	}
 }
 
