@@ -17,9 +17,16 @@ pipeline {
 	   {
             steps 
 	      {
-       	 echo 'check if we need one'
-		 input id: 'Version', message: 'New Version Dialouge', ok: 'Go', parameters: [booleanParam(defaultValue: false, description: 'Do we need to create a new version?', name: 'needs'), string(defaultValue: '2016-08-08r0', description: 'What is the new version?', name: 'vers')]
-             }
+       	 	configs = readYaml file: "./jenkinsconfig.yaml"
+			if (configs.CreateNewApi == true)
+			{
+				echo 'Do it.'
+			}
+			else
+			{
+				echo 'Don't.'
+			} 
+            }
           }
 
 
