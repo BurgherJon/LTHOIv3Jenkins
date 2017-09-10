@@ -1,3 +1,5 @@
+
+
 pipeline {
     agent any
 
@@ -17,7 +19,7 @@ pipeline {
 	   {
             steps 
 	      {
-       	 	configs = readYaml file: "./jenkinsconfig.yaml"
+       		configs = readYaml file: "./jenkinsconfig.yaml"
 			if (configs.CreateNewApi == true)
 			{
 				echo 'Do it.'
@@ -26,6 +28,7 @@ pipeline {
 			{
 				echo 'Dont.'
 			} 
+ 	
             }
           }
 
