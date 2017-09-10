@@ -1,4 +1,17 @@
 
+def processConfigs()
+{
+	configs = readYaml file: "./jenkinsconfig.yaml"
+	if (configs.CreateNewApi == true)
+	{
+		echo 'Do it.'
+	}
+	else
+	{
+		echo 'Dont.'
+	}
+}
+
 
 pipeline {
     agent any
@@ -19,15 +32,7 @@ pipeline {
 	   {
             steps 
 	      {
-       		configs = readYaml file: "./jenkinsconfig.yaml"
-			if (configs.CreateNewApi == true)
-			{
-				echo 'Do it.'
-			}
-			else
-			{
-				echo 'Dont.'
-			} 
+       		 processConfigs()
  	
             }
           }
