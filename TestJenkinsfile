@@ -24,7 +24,7 @@ pipeline {
 			}
 			else
 			{
-				echo 'Don't.'
+				echo 'Dont.'
 			} 
             }
           }
