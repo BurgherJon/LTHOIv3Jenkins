@@ -8,6 +8,9 @@ def processConfigs()
 		echo 'Login the prod service account.'
         sh 'gcloud auth activate-service-account jenkins@leavethehouseoutofit.iam.gserviceaccount.com --key-file=/home/bitnami/downloads/LeaveTheHouseOutOfIt-fac0b08781ca.json'
 
+        echo 'Switch to the prod project.'
+        sh 'gcloud config set project leavethehouseoutofit'
+
 		echo 'Deploy the new API.'
 		sh 'gcloud service-management deploy openapi.json'
 	}
@@ -58,6 +61,9 @@ pipeline {
             {
                 echo 'Login the prod service account.'
                 sh 'gcloud auth activate-service-account jenkins@leavethehouseoutofit.iam.gserviceaccount.com --key-file=/home/bitnami/downloads/LeaveTheHouseOutOfIt-fac0b08781ca.json'
+
+                echo 'Switch to the prod project.'
+                sh 'gcloud config set project leavethehouseoutofit'
 
                 echo 'Deploying to Prod.'
 			    sh './gradlew appengineDeploy'
