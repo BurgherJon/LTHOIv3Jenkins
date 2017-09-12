@@ -1,0 +1,68 @@
+@Library('github.com/mozmar/jenkins-pipeline@master')
+
+def processConfigs()
+{
+	configs = readYaml file: "./jenkinsconfig.yaml"
+	if (configs.CreateNewApi == true)
+	{
+		echo 'Login the prod service account.'
+        sh 'gcloud auth activate-service-account jenkins@leavethehouseoutofit.iam.gserviceaccount.com --key-file=/home/bitnami/downloads/LeaveTheHouseOutOfIt-fac0b08781ca.json'
+
+		echo 'Deploy the new API.'
+		sh 'gcloud service-management deploy openapi.json'
+	}
+	else
+	{
+		echo 'Not creating a new API'
+	}
+}
+
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') 
+	   {
+            steps 
+	      {
+            echo 'Checking Out..'
+			git 'https://github.com/BurgherJon/LTHOIv3'
+			
+            echo 'Move files to make this the production release candidate'
+            sh 'mv prodfiles/appengine-web.xml backend/src/main/webapp/WEB-INF/'
+            sh 'mv prodfiles/web.xml backend/src/main/webapp/WEB-INF/'
+            sh 'mv prodfiles/build.gradle backend/'
+            sh 'mv prodfiles/openapi.json .'
+
+
+			echo 'Building...'
+			sh './gradlew build'
+            }
+        }
+	   stage('Reconfigure') 
+	   {
+            steps 
+	      {
+                processConfigs()
+ 	
+            }
+          }
+
+
+
+
+	   stage('Prod Deploy')
+	   {
+            steps 
+            {
+                echo 'Login the prod service account.'
+                sh 'gcloud auth activate-service-account jenkins@leavethehouseoutofit.iam.gserviceaccount.com --key-file=/home/bitnami/downloads/LeaveTheHouseOutOfIt-fac0b08781ca.json'
+
+                echo 'Deploying to Prod.'
+			    sh './gradlew appengineDeploy'
+            }
+        }
+        
+    }
+}
